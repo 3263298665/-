@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/films_sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/films_sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true
     username: root
     password: 13579sh88
   mvc:
@@ -19,4 +19,16 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.example.demo.entity
+  naming-strategy: com.baomidou.mybatisplus.annotation.IgnoreStrategy
+  type-aliases-package: com.chen.cloudshadow.pojo
+
+# SLF4J 日志配置
+logging:
+  level:
+    root: INFO  # 设置根日志级别为 INFO
+    com.chen.cloudshadow: DEBUG  # 设置特定包的日志级别为 DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"  # 控制台日志输出格式
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"  # 文件日志输出格式
+  file:
+    name: logs/app.log  # 日志文件名
