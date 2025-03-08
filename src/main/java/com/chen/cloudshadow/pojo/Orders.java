@@ -1,18 +1,16 @@
 package com.chen.cloudshadow.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -36,27 +34,21 @@ public class Orders implements Serializable {
     private Integer orderId;
 
     @ApiModelProperty(value = "用户ID")
-    @TableField("user_id")
     private Integer userId;
 
     @ApiModelProperty(value = "场次ID")
-    @TableField("screening_id")
     private Integer screeningId;
 
     @ApiModelProperty(value = "订单总价")
-    @TableField("total_price")
     private BigDecimal totalPrice;
 
     @ApiModelProperty(value = "订单状态")
-    @TableField("status")
     private String status;
 
     @ApiModelProperty(value = "订单创建时间")
-    @TableField("created_at")
     private LocalDateTime createdAt;
 
     @ApiModelProperty(value = "订单更新时间")
-    @TableField("updated_at")
     private LocalDateTime updatedAt;
 
 

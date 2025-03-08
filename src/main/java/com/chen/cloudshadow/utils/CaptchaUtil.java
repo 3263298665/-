@@ -1,16 +1,16 @@
 package com.chen.cloudshadow.utils;
 
+import com.chen.cloudshadow.dto.CaptchaDto;
+
 import javax.imageio.ImageIO;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CaptchaUtil {
     private static final int WIDTH = 100;
@@ -18,10 +18,10 @@ public class CaptchaUtil {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int CHAR_COUNT = 6;
 
-    public static String generateCaptcha(HttpServletRequest request) {
+    private static final Map<String,Object> captchaMap = new ConcurrentHashMap<>();
+    public static Map<String,Object> generateCaptcha(String username) {
         BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = image.createGraphics();
-        HttpSession session = request.getSession();
         // Set background color
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, WIDTH, HEIGHT);
@@ -40,7 +40,6 @@ public class CaptchaUtil {
             int y = HEIGHT / 2;
             g2d.drawString(String.valueOf(c), x, y);
         }
-        session.setAttribute("captcha", captchaText.toString());
         // Draw random lines
         g2d.setColor(Color.GRAY);
         for (int i = 0; i < 5; i++) {
@@ -61,6 +60,7 @@ public class CaptchaUtil {
             e.printStackTrace();
         }
         byte[] imageBytes = baos.toByteArray();
-        return Base64.getEncoder().encodeToString(imageBytes);
+        captchaMap.put(username,new CaptchaDto(captchaText.toString(),Base64.getEncoder().encodeToString(imageBytes)));
+        return captchaMap;
     }
 }

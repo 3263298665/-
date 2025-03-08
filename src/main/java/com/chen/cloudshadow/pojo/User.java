@@ -1,7 +1,6 @@
 package com.chen.cloudshadow.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -24,9 +23,9 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("users")
-@ApiModel(value="Users对象", description="用户表")
-public class Users implements Serializable {
+@TableName("user")
+@ApiModel(value="User对象", description="用户表")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,31 +34,24 @@ public class Users implements Serializable {
     private Integer userId;
 
     @ApiModelProperty(value = "用户名")
-    @TableField("username")
     private String username;
 
-    @ApiModelProperty(value = "用户密码的哈希值")
-    @TableField("password_hash")
-    private String passwordHash;
+    @ApiModelProperty(value = "用户密码")
+    private String password;
 
     @ApiModelProperty(value = "用户邮箱")
-    @TableField("email")
     private String email;
 
     @ApiModelProperty(value = "用户手机号")
-    @TableField("phone_number")
     private String phoneNumber;
 
     @ApiModelProperty(value = "用户角色")
-    @TableField("role")
     private String role;
 
     @ApiModelProperty(value = "用户注册时间")
-    @TableField("created_at")
     private LocalDateTime createdAt;
 
     @ApiModelProperty(value = "用户信息更新时间")
-    @TableField("updated_at")
     private LocalDateTime updatedAt;
 
 
